@@ -1,0 +1,31 @@
+title_name = "Burnout Paradise Demo"
+title_id = "45418839" # EA-34873
+hash = "D8C2337E659838AE"
+media_id = "371792AF"
+
+[[patch]]
+    name = "Bo98's Custom Online Server"
+    author = "JeBobs"
+    is_enabled = true
+
+    # Server type
+    # (0 = local, 1 = dev, 2 = retail/test, 3 = juice, 4 = artist, 5 = demo 1, 6 = demo 2)
+    # 0, 3 and 4 activate -nosecure
+    [[patch.be32]]
+        address = 0x8289a8cc
+        value = 0x00000004
+
+    # Address string for types 3 and 4.
+    [[patch.string]]
+        address = 0x820e3e78
+        value = "gs.bo98.uk"
+    # Null-terminate (patch.string sadly doesn't do that)
+    [[patch.be8]]
+        address = 0x820e3e82
+        value = 0x00
+    
+    # Demo port
+    # Release uses 21860, demo uses 21880. This changes the end byte from 80 (78) to 60 (64).
+    [[patch.be8]]
+        address = 0x822cf503
+        value = 0x00000064

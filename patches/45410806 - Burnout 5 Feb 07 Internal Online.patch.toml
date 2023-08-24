@@ -1,0 +1,25 @@
+title_name = "Burnout 5"
+title_id = "45410806" # EA-2054
+hash = "543E9F9250C149EA" # Feb 2007 Internal
+media_id = "00000000"
+
+[[patch]]
+    name = "Custom online server"
+    author = "Bo98"
+    is_enabled = true
+
+    # Server type
+    # (0 = local, 1 = dev, 2 = test, 3 = juice, 4 = artist)
+    # 0, 3 and 4 activate -nosecure
+    [[patch.be32]]
+        address = 0x82d7e318
+        value = 0x00000004
+
+    # Address string for types 3 and 4.
+    [[patch.string]]
+        address = 0x8208dd38
+        value = "gs.bo98.uk"
+    # Null-terminate (patch.string sadly doesn't do that)
+    [[patch.be8]]
+        address = 0x8208dd42
+        value = 0x00

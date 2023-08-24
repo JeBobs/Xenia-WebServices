@@ -1,0 +1,18 @@
+title_name = "Burnout 5"
+title_id = "45410806" # EA-2054
+hash = "393AFE663708F6CD" # Feb 2007 Artist
+media_id = "00000000"
+
+[[patch]]
+    name = "Custom online server"
+    author = "Bo98"
+    is_enabled = true
+
+    # Address string for types 3 and 4.
+    [[patch.string]]
+        address = 0x8204b5f0
+        value = "gs.bo98.uk"
+    # Null-terminate (patch.string sadly doesn't do that)
+    [[patch.be8]]
+        address = 0x8204b5fa
+        value = 0x00

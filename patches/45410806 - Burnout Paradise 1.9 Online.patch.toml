@@ -1,0 +1,35 @@
+title_name = "Burnout Paradise"
+title_id = "45410806" # EA-34873
+hash = "9C7F95D913BF9B1B"
+media_id = "4B946215"
+
+[[patch]]
+    name = "Bo98's Custom Online Server"
+    author = "JeBobs"
+    is_enabled = true
+
+    # Server type
+    # (0 = local, 1 = dev, 2 = retail/test, 3 = juice, 4 = artist, 5 = demo 1, 6 = demo 2)
+
+    # Address string for types 3 and 5.
+    [[patch.string]]
+        address = 0x8810c9a4
+        value = "gs.bo98.uk"
+
+    [[patch.be8]]
+        address = 0x8810c9ae
+        value = 0x00   
+
+    # 1.6+ nosecure patch
+    # Starting with 1.6, only server type 0 enables -nosecure. This enables -nosecure for all but type 0.  
+    [[patch.be8]]
+        address = 0x885E1087
+        value = 0x00
+
+    # Demo port
+    # 1.0 & Bo98's server uses 21860, demo & 1.6+ uses 21880. This changes the end byte from 80 (78) to 60 (64).
+
+    # Type 3
+    [[patch.be8]]
+        address = 0x883cdaf7
+        value = 0x00000064

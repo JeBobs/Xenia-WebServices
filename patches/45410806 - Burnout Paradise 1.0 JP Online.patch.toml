@@ -1,0 +1,33 @@
+title_name = "Burnout Paradise"
+title_id = "45410806" # EA-2054
+hash = "E463055CD649D61B"
+media_id = "2B99A9CE"
+
+[[patch]]
+    name = "Bo98's Custom Online Server"
+    author = "JeBobs"
+    is_enabled = true
+
+    # Server type
+    # (0 = local, 1 = dev, 2 = retail/test, 3 = juice, 4 = artist, 5 = demo 1, 6 = demo 2)
+    # 0, 3 and 4 activate -nosecure
+    [[patch.be32]]
+        address = 0x828bac54
+        value = 0x00000004
+
+    # Address string for types 3 and 4.
+    [[patch.string]]
+        address = 0x820e82a0
+        value = "gs.bo98.uk"
+    # Null-terminate (patch.string sadly doesn't do that)
+    [[patch.be8]]
+        address = 0x820e82aa
+        value = 0x00
+    
+    [[patch.be32]]
+        address = 0x82b61628
+        value = 0x39600438
+
+    [[patch.be32]]
+        address = 0x82b61624
+        value = 0x39400a00
